@@ -162,7 +162,7 @@ Le résultat de cette requête sera l'ensemble des documents ne contenant pas la
 
 ## Syntaxe de `distinct`
 
-L'opérateur `distinct` permet ne renvoyer que les valeurs distinctes d'un champ ou d'une liste de conditions. C'est l'équivalent du `DISTINCT` en SQL.
+La fonction `distinct` permet ne renvoyer que les valeurs distinctes d'un champ ou d'une liste de conditions. C'est l'équivalent du `DISTINCT` en SQL.
 
 ````{panels}
 
@@ -188,4 +188,23 @@ FROM nomDeLaCollection
 La requête ci-dessus permet de renvoyer tous les éléments distincts de `b` de la collection choisie. Si elle est bien formulée, on devrait obtenir tous les valeurs possibles du champ une fois au maximum.
 
 ## Syntaxe de `count`
+
+La fonction `count` permet de compter le nombre d'éléments ou de documents présents dans une collection. On peut l'utiliser directement sur la collection de base ou bien l'utiliser après avoir exécuter une requête.
+
+````{tabbed} Sur une collection sans requête
+
+```javascript
+db.nomDeLaCollection.count()
+```
+````
+
+````{tabbed} Sur une collection après requête
+
+```javascript
+db.nomDeLaCollection.find({"a": 1}).count()
+```
+
+````
+
+Bien entendu, les résultats seront différents car on n'a pas le même nombre de documents ou d'éléments avant et après une requête.
 
