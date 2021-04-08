@@ -13,12 +13,23 @@ kernelspec:
   name: imongo
 ---
 
-# Premières requêtes
-
-* Auteurs/trices : **Julie FRANCOISE, Manon MAHEO et Valentin PENISSON**
-
+(à retirer à la fin)
 Ce chapitre traite des points suivants :
 * Syntaxe de requêtes simples (syntaxe de `find`, opérateurs de comparaison, `distinct`, `count`, `sort`, `limit`)
+
+# Premières requêtes en MongoDB
+
+Dans un **système de base de données relationnelles** *(système qui utilise le langage SQL pour interroger les bases de données)* les données sont stockées par ligne *(appelées n-uplets)* dans des tables *(également appelées relations)*. Le modèle de données relationnel est un modèle très structuré, comportant des attributs typés (les colonnes ont un type) et des contraintes d'intégrité (comme l'unicité des valeurs de la clé primaire). Il est aussi nécessaire de faire des jointures sur plusieurs tables afin de tirer des informations pertinentes de la base.
+
+**Dans MongoDB, les données sont modélisées sous forme de document sous un style JSON.**
+
+On ne parle plus de tables, ni d'enregistrements mais de collections et de documents. Ce système de gestion de données nous évite de faire des jointures de tables car toutes les informations propres à un certain donnée sont stockées dans un même document.
+
+Dans cette partie, nous étudierons comment filtrer les données d'une base de données MongoDB. Ensuite nous regarderons comment effectuer des requêtes plus complexes, impliquant des opérateurs de comparaison. Quelques méthodes 
+
+Auteurs/trices : **Julie FRANCOISE, Manon MAHEO et Valentin PENISSON**
+
+---
 
 ## Interrogation des données et syntaxe de `find`
  
@@ -54,6 +65,10 @@ db.NYfood.find({"cuisine":"Bakery"})
 ```
 
 ````
+
++ pretty + projections
+
+---
 
 ## Opérateurs
 
@@ -160,6 +175,8 @@ db.t.find(
 ```
 Le résultat de cette requête sera l'ensemble des documents ne contenant pas la valeur **1** pour la variable `a` et **"blue"** pour la variable `b`.
 
+---
+
 ## Syntaxe de `distinct`
 
 L'opérateur `distinct` permet ne renvoyer que les valeurs distinctes d'un champ ou d'une liste de conditions. C'est l'équivalent du `DISTINCT` en SQL.
@@ -187,22 +204,7 @@ FROM nomDeLaCollection
 
 La requête ci-dessus permet de renvoyer tous les éléments distincts de `b` de la collection choisie. Si elle est bien formulée, on devrait obtenir tous les valeurs possibles du champ une fois au maximum.
 
+---
+
 ## Syntaxe de `count`
 
-La fonction `count` permet de compter le nombre d'éléments ou de documents présents dans une collection. On peut l'utiliser directement sur la collection de base ou bien l'utiliser après avoir exécuter une requête.
-
-````{tabbed} Sur une collection sans requête
-
-```javascript
-db.nomDeLaCollection.count()
-```
-````
-
-````{tabbed} Sur une collection après requête
-
-```javascript
-db.nomDeLaCollection.find({"a": 1}).count()
-```
-````
-
-Bien entendu, les résultats seront différents car on n'a pas le même nombre de documents ou d'éléments avant et après une requête.
